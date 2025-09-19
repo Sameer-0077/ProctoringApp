@@ -6,22 +6,13 @@ import useObjectDetection from "./hooks/useObjectDetection";
 import useRecorder from "./hooks/useRecorder";
 import { downloadPDF, downloadCSV } from "./utils/reportGenerator";
 
-/**
- * Normalizes incoming messages (string or objects) into a uniform event:
- * { type: "focus" | "object" | "other",
- *   message?: string,
- *   label?: string,
- *   confidence?: number,    // 0..1
- *   time: <ms-timestamp>
- * }
- */
 function normalizeEvent(msg) {
   // string -> focus event
   if (typeof msg === "string") {
     return { type: "focus", message: msg, time: Date.now() };
   }
 
-  // already normalized (best case)
+  // already normalized
   if (
     msg &&
     typeof msg === "object" &&
